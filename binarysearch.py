@@ -1,7 +1,7 @@
 import random
 
 
-def binary_search(lst: iter, obj: int | str) -> int | None:
+def binary_search(lst: iter, obj: int or str) -> int or None:
     lst_sorted = sorted(list(lst))
     low = 0
     high = len(lst_sorted)
