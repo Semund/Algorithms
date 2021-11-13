@@ -34,6 +34,16 @@ class SLinkedList:
             self._tail = new_item
         self._lenght += 1
 
+    def append_head(self, item):
+        new_item = NodeList(item)
+        if self.is_empty():
+            self._head = new_item
+            self._tail = new_item
+        else:
+            new_item.next = self._head
+            self._head = new_item
+        self._lenght += 1
+
     def __len__(self):
         return self._lenght
 
@@ -56,9 +66,10 @@ class SLinkedList:
 
 if __name__ == '__main__':
     my_llist = SLinkedList()
-    my_llist.append_tail(9)
-    my_llist.append_tail(1)
-    my_llist.append_tail(5)
-    my_llist.append_tail(2)
-    my_llist.append_tail(6)
+    print(my_llist.is_empty())
+    for i in range(10):
+        my_llist.append_tail(i)
+    print(len(my_llist))
+    for j in range(11, 20):
+        my_llist.append_head(j)
     print(my_llist)
