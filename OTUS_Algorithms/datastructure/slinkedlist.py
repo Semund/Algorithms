@@ -37,4 +37,28 @@ class SLinkedList:
     def __len__(self):
         return self._lenght
 
+    def __str__(self):
+        return " --> ".join([str(item) for item in self])
 
+    def __iter__(self):
+        self.current_item = None
+        return self
+
+    def __next__(self):
+        if self.current_item is None:
+            self.current_item = self._head
+        else:
+            self.current_item = self.current_item.next
+        if self.current_item is None:
+            raise StopIteration
+        return self.current_item
+
+
+if __name__ == '__main__':
+    my_llist = SLinkedList()
+    my_llist.append_tail(9)
+    my_llist.append_tail(1)
+    my_llist.append_tail(5)
+    my_llist.append_tail(2)
+    my_llist.append_tail(6)
+    print(my_llist)
