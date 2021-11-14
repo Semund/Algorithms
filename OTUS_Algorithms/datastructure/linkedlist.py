@@ -71,6 +71,14 @@ class LinkedList:
         pass
 
     @abstractmethod
+    def pop_tail(self):
+        pass
+
+    @abstractmethod
+    def pop_head(self):
+        pass
+
+    @abstractmethod
     def __str__(self):
         pass
 
@@ -117,6 +125,29 @@ class SLinkedList(LinkedList):
             prev_item.next = new_item
             new_item.next = current_item
             self._lenght += 1
+
+    def pop_head(self):
+        if self._lenght:
+            current_item = self._head
+            self._head = self._head.next
+            self._lenght -= 1
+            return current_item
+
+    def pop_tail(self):
+        if self._lenght:
+            if self._head != self._tail:
+                current_item = self._tail
+                for item in self:
+                    if item.next == self._tail:
+                        item.next = None
+                        self._tail = item
+                        break
+            else:
+                current_item = self._tail
+                self._head = None
+                self._tail = None
+            self._lenght -= 1
+            return current_item
 
     def __str__(self):
         return " --> ".join([str(item) for item in self])
@@ -174,6 +205,32 @@ class DLinkedList(LinkedList):
             new_item.next = current_item
             current_item.prev = new_item
             self._lenght += 1
+
+    def pop_head(self):
+        if self._lenght:
+            current_item = self._head
+            next_item = self._head.next
+            if next_item:
+                next_item.prev = None
+                self._head = next_item
+            else:
+                self._head = None
+                self._tail = None
+            self._lenght -= 1
+            return current_item
+
+    def pop_tail(self):
+        if self._lenght:
+            current_item = self._tail
+            prev_item = self._tail.prev
+            if prev_item:
+                prev_item.next = None
+                self._tail = prev_item
+            else:
+                self._head = None
+                self._tail = None
+            self._lenght -= 1
+            return current_item
 
     def __str__(self):
         return " <---> ".join([str(item) for item in self])
