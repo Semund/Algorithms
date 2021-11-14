@@ -47,21 +47,24 @@ class SLinkedList:
     def append_position(self, item, index):
         if index > self._lenght:
             raise IndexError
-        new_item = NodeList(item)
-        i = 0
-        current_item = self._head
-        prev_item = None
-        while i < index:
-            prev_item = current_item
-            current_item = current_item.next
-            i += 1
-        if prev_item is None:
-            new_item.next = self._head
-            self._head = new_item
+
+        if index == 0:
+            self.append_head(item)
+        elif index == self._lenght:
+            self.append_tail(item)
         else:
+            new_item = NodeList(item)
+            iteration = iter(self)
+            current_item = next(iteration)
+            while index > 0:
+                prev_item = current_item
+                current_item = next(iteration)
+                index -= 1
+
             prev_item.next = new_item
             new_item.next = current_item
-        self._lenght += 1
+            self._lenght += 1
+
 
     def __len__(self):
         return self._lenght
@@ -79,17 +82,10 @@ class SLinkedList:
 if __name__ == '__main__':
     my_llist = SLinkedList()
     print(my_llist.is_empty())
-    for i in range(10):
-        my_llist.append_tail(i)
-    print(len(my_llist))
-    for j in range(11, 20):
-        my_llist.append_head(j)
+    # for i in range(10):
+    #     my_llist.append_tail(i)
     print(my_llist)
-    my_llist.append_position(100, 10)
+    my_llist.append_position('test', 0)
+    my_llist.append_position('test2', 1)
+    my_llist.append_position('test3', 2)
     print(my_llist)
-    my_llist.append_position(200, 0)
-    print(my_llist)
-    llist = SLinkedList()
-    llist.append_position(1, 0)
-    llist.append_position(2, 1)
-    print(llist)
