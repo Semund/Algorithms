@@ -66,7 +66,6 @@ class SLinkedList:
             new_item.next = current_item
             self._lenght += 1
 
-
     def __len__(self):
         return self._lenght
 
