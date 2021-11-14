@@ -1,3 +1,6 @@
+import linkedlist
+
+
 class QueueByStacks:
     def __init__(self):
         self._stack1 = []
@@ -23,3 +26,22 @@ class QueueByStacks:
     def __str__(self):
         return " -> ".join(map(str, self._stack1[::-1] + self._stack2))
 
+
+class QueueByLinkedList:
+    def __init__(self):
+        self._queue = linkedlist.SLinkedList()
+
+    def push(self, item):
+        self._queue.append_tail(item)
+
+    def pop(self):
+        return self._queue.pop_head()
+
+    def is_empty(self):
+        return len(self) == 0
+
+    def __len__(self):
+        return len(self._queue)
+
+    def __str__(self):
+        return " -> ".join([str(item) for item in self._queue][::-1])
