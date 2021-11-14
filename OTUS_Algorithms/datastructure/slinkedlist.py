@@ -70,17 +70,10 @@ class SLinkedList:
         return " --> ".join([str(item) for item in self])
 
     def __iter__(self):
-        self.current_item = None
-        return self
-
-    def __next__(self):
-        if self.current_item is None:
-            self.current_item = self._head
-        else:
-            self.current_item = self.current_item.next
-        if self.current_item is None:
-            raise StopIteration
-        return self.current_item
+        current_item = self._head
+        while current_item:
+            yield current_item
+            current_item = current_item.next
 
 
 if __name__ == '__main__':
