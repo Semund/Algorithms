@@ -1,3 +1,6 @@
+from math import ceil, log2
+
+
 class MaxHeap:
     def __init__(self, *elem):
         self.heap = list(elem)
@@ -57,15 +60,17 @@ class MaxHeap:
             self.sift_down(index)
 
     def print_heap(self):
+        start_pow = ceil(log2(self.size))
         i = 1
         index = 0
         while index < self.size:
             current_line = self.heap[index:2 ** i - 1]
-            spaces = " " * ((self.size - 2 * len(current_line)) // 2)
-            print(spaces + ' '.join(map(str, current_line)) + spaces)
+            sep = " " * (2 ** (start_pow - i + 1) - 1)
+            line_output = " " * (2 ** (start_pow - i) - 1) + sep.join(map(str, current_line))
+            print(line_output)
             index = 2 ** i - 1
             i += 1
 
 
-hp = MaxHeap(*range(15))
+hp = MaxHeap(*range(31))
 hp.print_heap()
