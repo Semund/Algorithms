@@ -60,17 +60,17 @@ class MaxHeap:
             self.sift_down(index)
 
     def print_heap(self):
-        start_pow = ceil(log2(self.size))
-        i = 1
-        index = 0
-        while index < self.size:
-            current_line = self.heap[index:2 ** i - 1]
-            sep = " " * (2 ** (start_pow - i + 1) - 1)
-            line_output = " " * (2 ** (start_pow - i) - 1) + sep.join(map(str, current_line))
-            print(line_output)
-            index = 2 ** i - 1
-            i += 1
+        heap_hight = ceil(log2(self.size))
+        while self.size < 2 ** heap_hight:
+            self.heap.append('-')
+            self.size += 1
+        for i in range(heap_hight):
+            current_heap_level = self.heap[2 ** i - 1: 2 ** (i + 1) - 1]
+            print_line = f'{" " * 2 ** (heap_hight - i - 1)}'
+            for elem in current_heap_level:
+                sep_spaces = 2 ** (heap_hight - i)
+                print_line += f'{elem:<{sep_spaces}}'
+            print(print_line)
 
-
-hp = MaxHeap(*range(31))
+hp = MaxHeap(*range(128))
 hp.print_heap()
