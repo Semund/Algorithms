@@ -1,6 +1,7 @@
 from random import randint
 from timer import timer
 
+
 @timer
 def insertion_sort(list_for_sort: list):
     lst = list_for_sort[:]
@@ -13,7 +14,8 @@ def insertion_sort(list_for_sort: list):
         lst[j + 1] = item_to_insert
     return lst
 
+
 if __name__ == '__main__':
     list_for_sort = [randint(1, 1000000) for _ in range(10000)]
     # list_for_sort = list(range(100000))
-    print(insertion_sort(list_for_sort))
+    print(insertion_sort(list_for_sort) == sorted(list_for_sort))
