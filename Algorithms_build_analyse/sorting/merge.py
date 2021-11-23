@@ -23,11 +23,10 @@ def merge(left: list, right: list):
 def merge_sort(nums):
     if len(nums) < 2:
         return nums
-    else:
-        pivot = len(nums) // 2
-        left = merge_sort(nums[:pivot])
-        right = merge_sort(nums[pivot:])
-        return merge(left, right)
+    pivot = len(nums) // 2
+    left = merge_sort(nums[:pivot])
+    right = merge_sort(nums[pivot:])
+    return merge(left, right)
 
 
 nums = [randint(1, 10000) for _ in range(10000)]
