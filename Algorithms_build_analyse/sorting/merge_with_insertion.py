@@ -1,4 +1,5 @@
 from random import randint
+from insertion import insertion_sort
 
 
 def merge(left: list, right: list):
@@ -20,9 +21,9 @@ def merge(left: list, right: list):
     return result
 
 
-def merge_sort(nums):
-    if len(nums) < 2:
-        return nums
+def merge_sort(nums, k=2):
+    if len(nums) < k:
+        return insertion_sort(nums)
     pivot = len(nums) // 2
     left = merge_sort(nums[:pivot])
     right = merge_sort(nums[pivot:])
@@ -32,3 +33,5 @@ def merge_sort(nums):
 if __name__ == '__main__':
     nums = [randint(1, 10000) for _ in range(10000)]
     print(merge_sort(nums) == sorted(nums))
+
+

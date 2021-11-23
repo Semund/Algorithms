@@ -12,4 +12,5 @@ def insertion_sort(nums):
     return nums
 
 
-print(insertion_sort([randint(1, 100) for _ in range(100)]))
+if __name__ == '__main__':
+    print(insertion_sort([randint(1, 100) for _ in range(100)]))
