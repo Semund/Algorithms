@@ -19,7 +19,7 @@ def find_max_crossing_subarray(array: list, start: int, end: int, mid: int) -> t
 
 def find_max_subarray(array: list, start: int, end: int) -> tuple:
     """
-    The function searches for a subarray with the maximum sum of elements in the input array.
+    The function searches for a subarray with the maximum sum of elements in the input array. Difficult O(nlgn).
     The subarray can be found in the left half, right half, or with an intersection in the middle of the original array.
     :param array: input array
     :param start: start-index of array
