@@ -1,5 +1,5 @@
 from random import randint
-from insertion import insertion_sort
+from insertionsort import insertion_sort
 
 
 def merge(left: list, right: list):
