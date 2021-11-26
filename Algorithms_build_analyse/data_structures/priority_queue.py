@@ -2,8 +2,9 @@ from maxheap import MaxHeap
 
 
 class Item:
-    def __init__(self, values):
-        self._key, *self._value = values
+    def __init__(self, index, value):
+        self._key, *self._value = value
+        self.index = index
 
     @property
     def key(self):
@@ -14,34 +15,27 @@ class Item:
         self._key = new_key
 
     def __gt__(self, other):
-        return self.key > other.key
+        return self.key > other.key or (self.key == other.key and self.index < other.index)
 
     def __eq__(self, other):
         return self.key == other.key
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.key} --> {','.join(map(str, self._value))}"
 
 
-class PriorityQueue:
+class PriorityQueue(MaxHeap):
     def __init__(self):
-        self.queue = MaxHeap()
+        super(PriorityQueue, self).__init__()
 
     def insert(self, item):
-        item = Item(item)
-        self.queue.insert(item)
-
-    def get_max(self):
-        return self.queue.get_max()
-
-    def extract_max(self):
-        return self.queue.extract_max()
-
-    def increase_key(self, index, priority):
-        self.queue.change_priority(index, priority)
+        element = Item(self.size, item)
+        self.heap.append(element)
+        self.size += 1
+        self.sift_up(self.size - 1)
 
     def __len__(self):
-        return self.queue.size
+        return self.size
 
 
 if __name__ == '__main__':
@@ -58,5 +52,5 @@ if __name__ == '__main__':
     my_queue.insert((2, "tra10"))
     my_queue.insert((3, "tra11"))
 
-    while my_queue:
+    while len(my_queue) != 0:
         print(my_queue.extract_max())
