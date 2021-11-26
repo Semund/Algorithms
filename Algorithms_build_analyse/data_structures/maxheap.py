@@ -34,7 +34,7 @@ class MaxHeap:
     def insert(self, elem):
         self.heap.append(elem)
         self.size += 1
-        self.sift_up(-1)
+        self.sift_up(self.size - 1)
 
     def extract_max(self):
         self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
@@ -60,6 +60,10 @@ class MaxHeap:
             self.sift_down(index)
 
     def print_heap(self):
+        """
+        Displays a heap to the screen in an understandable way.
+        Works only with integer
+        """
         max_elem_len = len(str(self.get_max()))
         heap_hight = ceil(log2(self.size))
         while self.size < 2 ** heap_hight:
@@ -74,5 +78,7 @@ class MaxHeap:
                 line += f"{elem:^{len_last_level // 2 ** i}}"
             print(line)
 
-hp = MaxHeap(*range(64))
-hp.print_heap()
+
+if __name__ == '__main__':
+    hp = MaxHeap(*range(56))
+    hp.print_heap()
