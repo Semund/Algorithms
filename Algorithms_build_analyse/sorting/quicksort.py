@@ -1,3 +1,4 @@
+import random
 from random import randint
 
 
@@ -19,8 +20,22 @@ def quick_sort(array: list, begin: int, end: int):
         quick_sort(array, pivot + 1, end)
 
 
+def randomized_quick_sort(array: list, begin: int, end: int):
+    if begin < end:
+        pivot = randomized_partition(array, begin, end)
+        randomized_quick_sort(array, begin, pivot - 1)
+        randomized_quick_sort(array, pivot + 1, end)
+
+
+def randomized_partition(array: list, left: int, right: int):
+    i = random.randint(left, right)
+    array[i], array[right] = array[right], array[i]
+    return partition(array, left, right)
+
+
 if __name__ == '__main__':
     lst = [randint(1, 100000) for _ in range(1000000)]
-    test = sorted(lst[:])
+    test = lst[:]
     quick_sort(lst, 0, len(lst) - 1)
+    randomized_quick_sort(test, 0, len(test) - 1)
     print(lst == test)
