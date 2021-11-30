@@ -33,7 +33,7 @@ def randomized_partition(array: list, left: int, right: int):
     return lomuto_partition(array, left, right)
 
 
-def hoare_sort(array: list, left: int, right: int):
+def hoare_quick_sort(array: list, left: int, right: int):
     if left < right:
         x = array[right]
         i = left
@@ -47,8 +47,8 @@ def hoare_sort(array: list, left: int, right: int):
                 array[i], array[j] = array[j], array[i]
                 i += 1
                 j -= 1
-        hoare_sort(array, left, j)
-        hoare_sort(array, i, right)
+        hoare_quick_sort(array, left, j)
+        hoare_quick_sort(array, i, right)
 
 
 if __name__ == '__main__':
@@ -57,5 +57,5 @@ if __name__ == '__main__':
     lst_copy2 = lst[:]
     quick_sort(lst, 0, len(lst) - 1)
     randomized_quick_sort(lst_copy1, 0, len(lst_copy1) - 1)
-    hoare_sort(lst_copy2, 0, len(lst_copy2) - 1)
+    hoare_quick_sort(lst_copy2, 0, len(lst_copy2) - 1)
     print(lst == lst_copy1, lst == lst_copy2)
