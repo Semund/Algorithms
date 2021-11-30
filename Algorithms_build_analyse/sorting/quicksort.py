@@ -2,7 +2,7 @@ import random
 from random import randint
 
 
-def partition(array: list, left: int, right: int):
+def lomuto_partition(array: list, left: int, right: int):
     x = array[right]
     i = left - 1
     for j in range(left, right, 1):
@@ -15,7 +15,7 @@ def partition(array: list, left: int, right: int):
 
 def quick_sort(array: list, begin: int, end: int):
     if begin < end:
-        pivot = partition(array, begin, end)
+        pivot = lomuto_partition(array, begin, end)
         quick_sort(array, begin, pivot - 1)
         quick_sort(array, pivot + 1, end)
 
@@ -30,12 +30,32 @@ def randomized_quick_sort(array: list, begin: int, end: int):
 def randomized_partition(array: list, left: int, right: int):
     i = random.randint(left, right)
     array[i], array[right] = array[right], array[i]
-    return partition(array, left, right)
+    return lomuto_partition(array, left, right)
+
+
+def hoare_sort(array: list, left: int, right: int):
+    if left < right:
+        x = array[right]
+        i = left
+        j = right
+        while i <= j:
+            while array[i] < x:
+                i += 1
+            while array[j] > x:
+                j -= 1
+            if i <= j:
+                array[i], array[j] = array[j], array[i]
+                i += 1
+                j -= 1
+        hoare_sort(array, left, j)
+        hoare_sort(array, i, right)
 
 
 if __name__ == '__main__':
     lst = [randint(1, 100000) for _ in range(1000000)]
-    test = lst[:]
+    lst_copy1 = lst[:]
+    lst_copy2 = lst[:]
     quick_sort(lst, 0, len(lst) - 1)
-    randomized_quick_sort(test, 0, len(test) - 1)
-    print(lst == test)
+    randomized_quick_sort(lst_copy1, 0, len(lst_copy1) - 1)
+    hoare_sort(lst_copy2, 0, len(lst_copy2) - 1)
+    print(lst == lst_copy1, lst == lst_copy2)
