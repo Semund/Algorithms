@@ -5,6 +5,9 @@ class Node:
         self.left = left
         self.right = right
 
+    def __repr__(self):
+        return f"Item with key {self.key}. Parent: {self.parent.key}"
+
 
 class BinaryTree:
     def __init__(self):
@@ -43,6 +46,15 @@ class BinaryTree:
             x = x.left
         return x.key
 
+    def search(self, value):
+        x = self.root
+        while x is not None and x.key != value:
+            if x.key < value:
+                x = x.right
+            else:
+                x = x.left
+        return x
+
     def display_tree(self, item: Node, level=0):
         if item is not None:
             self.display_tree(item.left, level + 1)
@@ -62,5 +74,4 @@ if __name__ == '__main__':
     tree.insert(7)
 
     tree.display_tree(tree.root)
-    print(tree.get_min())
-    print(tree.get_max())
+    print(tree.search(5))
