@@ -6,7 +6,7 @@ class Node:
         self.right = right
 
     def __repr__(self):
-        return f"Item with key {self.key}. Parent: {self.parent.key}"
+        return f"Item with key {self.key}."
 
 
 class BinaryTree:
@@ -34,17 +34,39 @@ class BinaryTree:
             else:
                 y.left = item
 
-    def get_max(self):
-        x = self.root
+    @classmethod
+    def get_max(cls, item: Node):
+        x = item
         while x.right is not None:
             x = x.right
-        return x.key
+        return x
 
-    def get_min(self):
-        x = self.root
+    @classmethod
+    def get_min(cls, item: Node):
+        x = item
         while x.left is not None:
             x = x.left
-        return x.key
+        return x
+
+    def get_successor(self, item):
+        x = self.search(item)
+        if x.right is not None:
+            return self.get_min(x.right)
+        y = x.parent
+        while y is not None and x == y.right:
+            x = y
+            y = y.parent
+        return y
+
+    def get_predecessor(self, item):
+        x = self.search(item)
+        if x.left is not None:
+            return self.get_max(x.left)
+        y = x.parent
+        while y is not None and x == y.left:
+            x = y
+            y = y.parent
+        return y
 
     def search(self, value):
         x = self.root
@@ -57,9 +79,9 @@ class BinaryTree:
 
     def display_tree(self, item: Node, level=0):
         if item is not None:
-            self.display_tree(item.left, level + 1)
-            print(' ' * 4 * level + '->', item.key)
             self.display_tree(item.right, level + 1)
+            print(' ' * 4 * level + '->', item.key)
+            self.display_tree(item.left, level + 1)
 
 
 if __name__ == '__main__':
@@ -74,4 +96,4 @@ if __name__ == '__main__':
     tree.insert(7)
 
     tree.display_tree(tree.root)
-    print(tree.search(5))
+    print(tree.get_predecessor(35))
