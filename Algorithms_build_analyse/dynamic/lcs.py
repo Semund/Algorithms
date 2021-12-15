@@ -33,7 +33,9 @@ def find_lcs(s1: str, s2: str):
 
 if __name__ == '__main__':
 
-    s1 = "accggtcgagtgcgcggaagccggccgaa"
-    s2 = "gtcgttcggaatgccgttgctctgtaaa"
+    # s1 = "accggtcgagtgcgcggaagccggccgaa"
+    # s2 = "gtcgttcggaatgccgttgctctgtaaa"
+    s1 = "математика"
+    s2 = s1[::-1]
     print(find_lcs(s1, s2))
 
